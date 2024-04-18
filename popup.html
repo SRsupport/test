@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookie Consent</title>
+<style>
+    /* Style for the popup */
+    .popup {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #f3f3f3;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 9999;
+        max-width: 400px;
+        text-align: center;
+          background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+       color: white;
+      width: 100%;
+     max-width: 600px;
+    }
+    /* Style for the accept and decline buttons */
+    .popup button {
+        margin: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        border: none;
+        border-radius: 3px;
+        max-width: 200px;
+    border: 2px solid rgba(0, 212, 255, 1);
+    background: black;
+    color: white;
+    }
+    /* Style for the more info link */
+    .popup a {
+        color: #007bff;
+        text-decoration: none;
+    }
+</style>
+</head>
+<body>
+
+<!-- Popup container -->
+<div id="popup" class="popup">
+    <p>This website uses cookies to ensure you get the best experience on our website.</p>
+    <button onclick="acceptCookies()">Accept</button>
+    <button onclick="declineCookies()">Decline</button>
+   
+
+</div>
+
+<script>
+    
+    function checkCookieConsent() {
+        var consent = localStorage.getItem("cookieConsent");
+        return consent === "accepted";
+    }
+
+    function setCookieConsent(consent) {
+        localStorage.setItem("cookieConsent", consent);
+    }
+
+    function openPopup() {
+        var userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        if (userTimeZone === "Europe/Paris") {
+            window.location.href = "https://www.google.com"; // Redirect to France page
+        } else {
+            document.getElementById("popup").style.display = "block";
+        }
+    }
+
+    function acceptCookies() {
+        setCookieConsent("accepted");
+        document.getElementById("popup").style.display = "none";
+    }
+
+    function declineCookies() {
+        setCookieConsent("declined");
+        document.getElementById("popup").style.display = "none";
+    }
+
+    window.onload = openPopup;
+   
+</script>
+
+</body>
+</html>
